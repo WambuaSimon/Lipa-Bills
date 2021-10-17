@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_payment_app/component/colors.dart';
+import 'package:flutter_payment_app/widgets/large_button.dart';
 import 'package:flutter_payment_app/widgets/text_size.dart';
 import 'dart:math' as math;
 
@@ -24,6 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             _headSection(),
             _listBills(),
+            _payButton(),
           ],
         ),
       ),
@@ -34,17 +36,32 @@ class _MyHomePageState extends State<MyHomePage> {
     return Positioned(
         bottom: 10,
         right: 50,
-        child: Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage('images/lines.png')),
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 15,
-                    offset: Offset(0, 1),
-                    color: Color(0xFF11324d).withOpacity(0.2))
-              ]),
+        child: GestureDetector(
+          onTap: (){
+            //show overlay and options menu
+            showModalBottomSheet(
+              isScrollControlled: true,
+              barrierColor: Colors.transparent,
+                backgroundColor:Colors.grey.withOpacity(0.5) ,
+                context: context,
+                builder: (BuildContext bc){
+              return Container(
+                height: MediaQuery.of(context).size.height *3/4,
+              );
+                });
+          },
+          child: Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage('images/lines.png')),
+                boxShadow: [
+                  BoxShadow(
+                      blurRadius: 15,
+                      offset: Offset(0, 1),
+                      color: Color(0xFF11324d).withOpacity(0.2))
+                ]),
+          ),
         ));
   }
 
@@ -230,5 +247,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       )
     );
+  }
+
+  _payButton(){
+    return Positioned(
+      bottom: 10,
+        child: LargeButton(text:'Pay all bills',textColor: Colors.white,));
   }
 }
