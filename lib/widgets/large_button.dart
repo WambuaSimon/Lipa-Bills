@@ -10,8 +10,6 @@ class LargeButton extends StatelessWidget {
 
   const LargeButton({Key? key, this.backgroundColor:AppColor.mainColor,
     this.textColor, required this.text, this.onTap, this.isBorder:false
-
-
   }) : super(key: key);
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_payment_app/component/colors.dart';
+import 'package:flutter_payment_app/widgets/buttons.dart';
 import 'package:flutter_payment_app/widgets/large_button.dart';
 import 'package:flutter_payment_app/widgets/text_size.dart';
 import 'dart:math' as math;
@@ -41,12 +42,61 @@ class _MyHomePageState extends State<MyHomePage> {
             //show overlay and options menu
             showModalBottomSheet(
               isScrollControlled: true,
-              barrierColor: Colors.transparent,
-                backgroundColor:Colors.grey.withOpacity(0.5) ,
+                backgroundColor:Colors.transparent,
                 context: context,
                 builder: (BuildContext bc){
               return Container(
-                height: MediaQuery.of(context).size.height *3/4,
+                height: MediaQuery.of(context).size.height - 240,
+                child: Stack(
+                  children: [
+                    Positioned(
+                        bottom:0,
+                        child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height-300,
+                    )),
+                    Positioned(
+                      top: 0,
+                      right: 50,
+                        child: Container(
+                         padding: EdgeInsets.only(top: 5,bottom: 25),
+                      width: 60,
+                      height: 250,
+                      decoration: BoxDecoration(
+                        color: AppColor.mainColor,
+                        borderRadius: BorderRadius.circular(30)
+                      ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              AppButtons(icon: Icons.cancel,
+                                textColor: Colors.white,
+                                iconColor: AppColor.mainColor,
+                              backgroundColor: Colors.white,
+                                onTap: (){
+                                Navigator.pop(context);
+                                },
+                              ),
+                              AppButtons(icon: Icons.add,
+                                textColor: Colors.white,
+                                iconColor: AppColor.mainColor,
+                                backgroundColor: Colors.white,
+                                onTap: (){},
+                                text: 'Add Bill',
+                              ),
+                              AppButtons(icon: Icons.history,
+                                textColor: Colors.white,
+                                iconColor: AppColor.mainColor,
+                                backgroundColor: Colors.white,
+                                onTap: (){},
+                                text: 'History',
+                              )
+
+                            ],
+                          ),
+                    ))
+                  ],
+                )
               );
                 });
           },
