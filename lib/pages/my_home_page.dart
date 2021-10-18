@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_payment_app/component/colors.dart';
+import 'package:flutter_payment_app/pages/payment_page.dart';
 import 'package:flutter_payment_app/widgets/buttons.dart';
 import 'package:flutter_payment_app/widgets/large_button.dart';
 import 'package:flutter_payment_app/widgets/text_size.dart';
 import 'dart:math' as math;
+
+import 'package:get/get.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -27,6 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
             _headSection(),
             _listBills(),
             _payButton(),
+
           ],
         ),
       ),
@@ -123,6 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _mainBackground(),
           _curveImageContainer(),
           _buttonContainer(),
+          _textContainer()
         ],
       ),
     );
@@ -169,7 +174,6 @@ class _MyHomePageState extends State<MyHomePage> {
         removeTop: true,
         context: context,
         child: ListView.builder(
-
           itemCount: 3,
           itemBuilder: (_, index){
             return Container(
@@ -302,6 +306,35 @@ class _MyHomePageState extends State<MyHomePage> {
   _payButton(){
     return Positioned(
       bottom: 10,
-        child: LargeButton(text:'Pay all bills',textColor: Colors.white,));
+        child: LargeButton(text:'Pay all bills',
+          textColor: Colors.white,
+        onTap: (){
+          Get.to(()=>PaymentPage());
+        },));
+  }
+
+  _textContainer(){
+    return Stack(
+      children: [
+        Positioned(
+            left: 0,
+            top: 100,
+            child: Text('My Bills',
+              style: TextStyle(
+                  fontSize: 70,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF293952)
+              ),)),
+        Positioned(
+            left: 40,
+            top: 80,
+            child: Text('My Bills',
+              style: TextStyle(
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white
+              ),)),
+      ],
+    );
   }
 }
